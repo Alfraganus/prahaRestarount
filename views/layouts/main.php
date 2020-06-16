@@ -25,56 +25,156 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
-
+<div id="wrap">
+<header id="wrap-header">
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+        <!--menu + logo-->
+        <nav class="navbar navbar-default menu-nav">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--logo-->
+                    <a href="#" class="navbar-brand logo">
+                        <img src="images/logo.png" alt="image" width="150">
+                    </a>
+                    <!--/logo-->
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a class="active" href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="reservation.html">Reservation</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="blogdetail.html">Blog single</a></li>
+                                <li><a href="error_404.html">Error_404</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--/menu + logo-->
+    </div>
+</header>
+    <div id="wrap-body">
+        <?=$content?>
+        <footer id="wrap-footer" class="color-w">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <a href="#" class="logo">
+                                <img src="images/logo.png" alt="image">
+                            </a>
+                            <ul>
+                                <li>Add<span class="pull-right">300 E-Block Building, Malaysia</span></li>
+                                <li>Phone<span class="pull-right">+880 1973 833 508</span></li>
+                                <li>Email<span class="pull-right">ndktheme@gmail.com</span></li>
+                                <li>Website<span class="pull-right">http://www.ndktheme.com</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <h4>Opening hour</h4>
+                            <ul>
+                                <li>Monday<span class="pull-right">8:00 Am - 22:00 Pm</span></li>
+                                <li>Tuesday<span class="pull-right">8:00 Am - 22:00 Pm</span></li>
+                                <li>Wednesday<span class="pull-right">8:00 Am - 22:00 Pm</span></li>
+                                <li>Thursday<span class="pull-right">8:00 Am - 22:00 Pm</span></li>
+                                <li>Friday<span class="pull-right">8:00 Am - 22:00 Pm</span></li>
+                                <li>Saturday<span class="pull-right">10:00 Am - 23:00 Pm</span></li>
+                                <li>Sunday<span class="pull-right">Closed</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <h4>Gallery</h4>
+                            <ul class="gallery-2">
+                                <li class="gallery-item">
+                                    <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
+                                        <img src="images/default.png" alt="image">
+                                        <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
+                                    </a>
+                                </li>
+                                <li class="gallery-item">
+                                    <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
+                                        <img src="images/default.png" alt="image">
+                                        <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
+                                    </a>
+                                </li>
+                                <li class="gallery-item">
+                                    <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
+                                        <img src="images/default.png" alt="image">
+                                        <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
+                                    </a>
+                                </li>
+                                <li class="gallery-item">
+                                    <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
+                                        <img src="images/default.png" alt="image">
+                                        <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
+                                    </a>
+                                </li>
+                                <li class="gallery-item">
+                                    <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
+                                        <img src="images/default.png" alt="image">
+                                        <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
+                                    </a>
+                                </li>
+                                <li class="gallery-item">
+                                    <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
+                                        <img src="images/default.png" alt="image">
+                                        <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
+                                    </a>
+                                </li>
+                                <li class="gallery-item">
+                                    <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
+                                        <img src="images/default.png" alt="image">
+                                        <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
+                                    </a>
+                                </li>
+                                <li class="gallery-item">
+                                    <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
+                                        <img src="images/default.png" alt="image">
+                                        <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
+                                    </a>
+                                </li>
+                                <li class="gallery-item">
+                                    <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
+                                        <img src="images/default.png" alt="image">
+                                        <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <h4>Flow us on</h4>
+                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ant</p>
+                            <ul class="list-inline social-default social-bg-gray">
+                                <li><a href="#" class="fa fa-facebook"></a></li>
+                                <li><a href="#" class="fa fa-google-plus"></a></li>
+                                <li><a href="#" class="fa fa-twitter"></a></li>
+                                <li><a href="#" class="fa fa-youtube-play"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <p>Designed by <a href="#">ndktheme</a>. All Rights Reserved</p>
+                </div>
+            </div>
+        </footer>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
-
 <?php $this->endBody() ?>
 </body>
 </html>
