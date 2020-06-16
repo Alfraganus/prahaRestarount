@@ -259,10 +259,10 @@ h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{
 }
 /*4.3. Heading*/
 .heading-group{
-	/*background-image:url('../images/banner1.jpg');*/
-	background:#222;
+	background-image:url('../images/banner.jpg');
+	/*background:#222;*/
 	background-position:center top;
-	background-size:cover;
+	background-size:100% 100%;
 	background-attachment:fixed;
 	text-align:center;
 }
