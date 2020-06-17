@@ -11,6 +11,7 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\module',
+            
         ],
     ],
     'aliases' => [
@@ -18,6 +19,9 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'user' => [
+            'identityClass' => 'app\models\User',
+        ],
         'i18n' => [
             'translations' => [
                 'app' => [
