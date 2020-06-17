@@ -67,6 +67,7 @@ AppAsset::register($this);
     </div>
 </header>
     <div id="wrap-body">
+        <div class="preloader"><p></p></div>
         <?=$content?>
         <footer id="wrap-footer" class="color-w">
             <div class="footer-top">

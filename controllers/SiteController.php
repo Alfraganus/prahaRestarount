@@ -63,7 +63,55 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        \Yii::$app->language = 'en';
         return $this->render('index');
+    }
+
+    public function actionTranslate()
+    { if(isset($_POST['Room']))
+    {
+        $roomsInput = $_POST['Room'];
+        foreach($roomsInput as $item)
+        {
+            $sourceMessage = \app\models\SourceMessage::findOne(['message' => $item['description']]);
+
+            // If null, I need to create source message
+            if($sourceMessage == null)
+            {
+                $sourceMessage = new \app\models\SourceMessage();
+            }
+            $sourceMessage->category = 'app';
+            $sourceMessage->message = $item['description']['msg'];
+            $sourceMessage->save(false);
+
+            $otherLanguages = ['en', 'cz'];
+
+            foreach($otherLanguages as $otherLang)
+            {
+                $message = \app\models\Message::findOne(['id' => $sourceMessage->id, 'language' => $otherLang]);
+                if($message == null)
+                {
+                    $message = new \app\models\Message();
+                }
+                $message->id = $sourceMessage->id;
+                $message->language = $otherLang;
+                $message->translation = $item['description'][$otherLang];
+                $message->save(false);
+            }
+            return "<script> alert('data has been inserted')</script>";
+
+           /* // Room to update
+            $roomToUpdate = \app\models\Room::findOne($item['id']);
+            $roomToUpdate->description = $item['description']['en'];
+            $roomToUpdate->save();*/
+        }
+    }
+
+       /* $rooms = Room::find()
+            ->all();*/
+
+        return $this->render('translations');
+
     }
 
     /**

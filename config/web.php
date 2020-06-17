@@ -24,6 +24,7 @@ $config = [
                     'class' => 'yii\i18n\DbMessageSource',
                     //'messageTable' => 'message,
                     //'sourceMessageTable' => 'source_message,
+
                 ],
             ],
         ],
