@@ -19,15 +19,14 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
-        'user' => [
-            'identityClass' => 'app\models\User',
-        ],
+      
         'i18n' => [
             'translations' => [
                 'app' => [
                     'class' => 'yii\i18n\DbMessageSource',
                     //'messageTable' => 'message,
                     //'sourceMessageTable' => 'source_message,
+
                 ],
             ],
         ],

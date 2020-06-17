@@ -1,13 +1,16 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0a60afafb69735b97de1fa7517a820b9c094b7ae
 <!--slideshow-->
 <div class="heading-group slideshow color-w">
     <h1>Welccome to our<span>Restaurent</span></h1>
     <h3>BREAKFAST / CAFE / DESSERT / FAST FOOD / DINNER / EVENT</h3>
+<h3><?= \Yii::t('app', 'greeting');?></h3>
     <div class="star-group">
         <i class="fa fa-star-o"></i>
         <i class="fa fa-star-o star-1x"></i>
         <i class="fa fa-star-o"></i>
->>>>>>> aac0fde8cb5e4ee47d93830ebf6dccd4e90f91c8
     </div>
     <a class="btn btn-1" href="#">Read more</a>
 </div>
