@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Signup;
 
 class SiteController extends Controller
 {
@@ -59,30 +60,6 @@ class SiteController extends Controller
      *
      * @return string
      */
-
-public function actionSignup(){
-
-if(!Yii::$app->user->isGuest){
-    return $this->goHome();
-}
-$this->setMeta('Signup');
-$model = new SignupForm();
-if($model->load(\Yii::$app->request->post()) && $model->validate()){
-    $user = new User();
-    $user->username = $model->username;
-    $user->password = \Yii::$app->security->generatePasswordHash($model->password);
-
-if($user->save()){
-    \Yii::$app->user->login($user);
-    return $this->goHome();
-}
-}
-return $this->render('signup',compact('model'));
-
-
-
-
-}
 
 
     public function actionIndex()
@@ -143,40 +120,59 @@ return $this->render('signup',compact('model'));
      *
      * @return Response|string
      */
+    public function actionLogout()
+    {
+        if(!Yii::$app->user->isGuest)
+        {
+            Yii::$app->user->logout();
+            return $this->redirect(['login']);
+        }
+    }
+
+    public function actionSignup()
+    {
+        $model = new Signup();
+
+        if(isset($_POST['Signup']))
+        {
+            $model->attributes = Yii::$app->request->post('Signup');
+
+            if($model->validate() && $model->signup())
+            {
+                return $this->redirect(['default/']);
+            }
+        }
+
+        return $this->render('signup',['model'=>$model]);
+    }
+
+
+    //1. Проверить существует ли пользователь?
+    //2. "Внести" пользователя в систему(в сессию)
+
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if(!Yii::$app->user->isGuest)
+        {
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        $login_model = new Login();
+
+        if( Yii::$app->request->post('Login'))
+        {
+            $login_model->attributes = Yii::$app->request->post('Login');
+
+            if($login_model->validate())
+            {
+                Yii::$app->user->login($login_model->getUser());
+                return $this->goHome();
+            }
         }
 
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+        return $this->render('login',['login_model'=>$login_model]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
     public function actionContact()
     {
         $model = new ContactForm();
