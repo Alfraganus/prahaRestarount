@@ -19,7 +19,7 @@ class module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        Yii::$app->viewPath =  '@app/modules/admin/views';
+        yii::$app->viewPath='@app/modules/admin/views';
 
 //Yii::$app->viewPath = '@app/modules/admin/views';
 

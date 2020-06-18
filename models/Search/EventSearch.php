@@ -4,12 +4,12 @@ namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Events;
+use app\models\event;
 
 /**
- * EventsSearch represents the model behind the search form of `app\models\Events`.
+ * EventSearch represents the model behind the search form of `app\models\event`.
  */
-class EventsSearch extends Events
+class EventSearch extends event
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class EventsSearch extends Events
     {
         return [
             [['id'], 'integer'],
-            [['name', 'description', 'date', 'photo'], 'safe'],
+            [['event_title_en', 'event_title_cz', 'event_description_en', 'event_description_cz', 'event_photo'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class EventsSearch extends Events
      */
     public function search($params)
     {
-        $query = Events::find();
+        $query = event::find();
 
         // add conditions that should always apply here
 
@@ -59,12 +59,13 @@ class EventsSearch extends Events
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'date' => $this->date,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'photo', $this->photo]);
+        $query->andFilterWhere(['like', 'event_title_en', $this->event_title_en])
+            ->andFilterWhere(['like', 'event_title_cz', $this->event_title_cz])
+            ->andFilterWhere(['like', 'event_description_en', $this->event_description_en])
+            ->andFilterWhere(['like', 'event_description_cz', $this->event_description_cz])
+            ->andFilterWhere(['like', 'event_photo', $this->event_photo]);
 
         return $dataProvider;
     }

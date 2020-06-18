@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Events;
-use app\models\search\EventsSearch;
+use app\models\event;
+use app\models\search\EventSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EventsController implements the CRUD actions for Events model.
+ * EventController implements the CRUD actions for event model.
  */
-class EventsController extends Controller
+class EventController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class EventsController extends Controller
     }
 
     /**
-     * Lists all Events models.
+     * Lists all event models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new EventsSearch();
+        $searchModel = new EventSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class EventsController extends Controller
     }
 
     /**
-     * Displays a single Events model.
+     * Displays a single event model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class EventsController extends Controller
     }
 
     /**
-     * Creates a new Events model.
+     * Creates a new event model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Events();
+        $model = new event();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class EventsController extends Controller
     }
 
     /**
-     * Updates an existing Events model.
+     * Updates an existing event model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class EventsController extends Controller
     }
 
     /**
-     * Deletes an existing Events model.
+     * Deletes an existing event model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class EventsController extends Controller
     }
 
     /**
-     * Finds the Events model based on its primary key value.
+     * Finds the event model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Events the loaded model
+     * @return event the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Events::findOne($id)) !== null) {
+        if (($model = event::findOne($id)) !== null) {
             return $model;
         }
 

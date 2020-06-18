@@ -12,31 +12,21 @@ use app\assets\BackendAsset;
 use yii\helpers\Url;
 
 BackendAsset::register($this);
-
-$url = Yii::$app->homeUrl
 ?>
-
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Web UI Kit &amp; Dashboard Template based on Bootstrap">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, web ui kit, dashboard template, admin template">
-
-	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
-	<title>AdminKit Demo - Web UI Kit &amp; Dashboard Template</title>
-
-	<link href="css/app.css" rel="stylesheet">
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php $this->registerCsrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
 </head>
-
-
 <body>
 <?php $this->beginBody() ?>
+
 <div class="wrapper">
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
@@ -50,23 +40,44 @@ $url = Yii::$app->homeUrl
 					</li>
 
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="<?=Url::to(['default/'])?> ">
+						<a class="sidebar-link" href="<?=Url::to(['default/'])?>">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             </a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-profile.html">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">User Signup</span>
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
             </a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="<?=Url::to(['site/translate'])?>">
-              <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Static Language Setting</span>
+              <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Static Language change</span>
             </a>
 					</li>
-</ul>
+
+	
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="<?=Url::to(['food-menu/'])?>">
+              <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Add food</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+											<a class="sidebar-link" href="<?=Url::to(['event/'])?>">
+              <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Add events news</span>
+            </a>
+					</li>
+
+			
+
+					
+					
+
+				
+			
 
 				<div class="sidebar-cta">
 					<div class="sidebar-cta-content">
@@ -252,20 +263,17 @@ $url = Yii::$app->homeUrl
 					</ul>
 				</div>
 			</nav>
-      
+
 			<main class="content">
 				<div class="container-fluid p-0">
-              
-					<div class="row mb-2 mb-xl-3">
-						<div class="col-auto d-none d-sm-block">
-							<h3><strong>Analytics</strong> Dashboard</h3>
-						</div>
-                 
-                        <?=$content?>
+
+		
+<?=$content?>
+
 
 				</div>
 			</main>
-            
+
 			<footer class="footer">
 				<div class="container-fluid">
 					<div class="row text-muted">
@@ -295,7 +303,6 @@ $url = Yii::$app->homeUrl
 			</footer>
 		</div>
 	</div>
-
 
 
 <?php $this->endBody() ?>
