@@ -9,7 +9,7 @@ use app\models\search\EventSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
 /**
  * EventController implements the CRUD actions for event model.
  */
@@ -63,18 +63,54 @@ class EventController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new event();
+    // public function actionCreate()
+    // {
+    //     $model = new Event();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    //     if ($model->load(Yii::$app->request->post())) {
+
+    //          if ($model->save()) {
+    //             $model->EventPhoto = UploadedFile::getInstance($model, 'event_photo');
+    //             if ($model->EventPhoto && $model->upload()) {
+    //                 $model->EventPhoto = $model->EventPhoto->baseName.'.'.$model->EventPhoto->extension;
+    //                 $model->save();
+    //             }
+           
+    //             return $this->redirect(['view', 'id' => $model->id]);
+    //         }else {
+    //             return $this->render('create', [
+    //                 'model' => $model,
+    //             ]);
+    //         }
+
+
+    //     } 
+    //     }
+
+        public function actionCreate()
+        {
+            $model = new Event();
+    
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                $model->EventPhoto = UploadedFile::getInstance($model,'EventPhoto');
+                if($model->upload()){
+                    $model->EventPhoto = $model->EventPhoto->baseName.'.'.$model->EventPhoto->extension;
+                    $model->save();
+    
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+
+
+
+
+   
 
     /**
      * Updates an existing event model.

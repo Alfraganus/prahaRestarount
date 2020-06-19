@@ -10,17 +10,23 @@ use yii\widgets\ActiveForm;
 
 <div class="event-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'event_title_en')->textInput(['maxlength' => true]) ?>
+    <div class="col-md-9">
+    <div class="tab-content">
 
-    <?= $form->field($model, 'event_title_cz')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'event_title_en')->textarea(['rows'=>4]) ?>
 
-    <?= $form->field($model, 'event_description_en')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'event_title_cz')->textarea(['rows'=>4]) ?>
 
-    <?= $form->field($model, 'event_description_cz')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'event_description_en')->textarea(['rows' => 8]) ?>
 
-    <?= $form->field($model, 'event_photo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'event_description_cz')->textarea(['rows' => 8]) ?>
+
+    <?=$form->field($model,'event_photo')->fileInput();?>
+    <?php if($model->EventPhoto){?>
+    <img src="/uploads/<?=$model->EventPhoto?>"style="max-width: 100%">
+    <?php }?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

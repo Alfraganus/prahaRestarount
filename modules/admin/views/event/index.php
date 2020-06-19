@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'event_title_cz',
             'event_description_en:ntext',
             'event_description_cz:ntext',
-            //'event_photo',
+            'event_photo',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
