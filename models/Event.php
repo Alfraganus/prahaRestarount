@@ -16,7 +16,7 @@ use Yii;
  */
 class Event extends \yii\db\ActiveRecord
 {
-    public $EventPhoto;
+   public $imageFile;
     /**
      * {@inheritdoc}
      */
@@ -34,8 +34,8 @@ class Event extends \yii\db\ActiveRecord
             [['event_title_en', 'event_title_cz', 'event_description_en', 'event_description_cz'], 'required'],
             [['event_description_en', 'event_description_cz'], 'string'],
             [['event_title_en', 'event_title_cz'], 'string', 'max' => 255],
-            [['event_photo'],'file','extensions'=>['png','jpg','jpeg']],
-            [['image'],'safe'],
+            [['imageFile'],'file','extensions'=>['png','jpg','jpeg']],
+           
         
         ];
     }
@@ -43,8 +43,8 @@ class Event extends \yii\db\ActiveRecord
 
 public function upload()
 {
-    if($this->validate() and $this->EventPhoto->baseName){
-        $this->EventPhoto->saveAs(Yii::$app->basePath.'uploads/'.$this->EventPhoto->extensions);
+    if($this->imageFile->baseName){
+        $this->imageFile->saveAs(Yii::$app->basePath.'uploads/'.$imageFile->baseName . '.'.$imageFile->extension);
         return true;
     }else{
         return false;

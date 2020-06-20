@@ -89,23 +89,24 @@ class EventController extends Controller
 
         public function actionCreate()
         {
+           
             $model = new Event();
-    
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $model->EventPhoto = UploadedFile::getInstance($model,'EventPhoto');
-                if($model->upload()){
-                    $model->EventPhoto = $model->EventPhoto->baseName.'.'.$model->EventPhoto->extension;
-                    $model->save();
-    
-                }
-                return $this->redirect(['view', 'id' => $model->id]);
+                
+            if ($model->load(Yii::$app->request->post())) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+               if($model->upload())
+               {
+                   echo "<script>alert('kuch')</script>";
+               }
+                 
+                return $this->goBack();
             } else {
                 return $this->render('create', [
                     'model' => $model,
                 ]);
             }
+         
         }
-
 
 
 

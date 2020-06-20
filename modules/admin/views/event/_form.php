@@ -10,8 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="event-form">
 
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
     <div class="col-md-9">
     <div class="tab-content">
 
@@ -23,10 +22,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'event_description_cz')->textarea(['rows' => 8]) ?>
 
-    <?=$form->field($model,'event_photo')->fileInput();?>
-    <?php if($model->EventPhoto){?>
-    <img src="/uploads/<?=$model->EventPhoto?>"style="max-width: 100%">
-    <?php }?>
+    <?=$form->field($model,'imageFile')->fileInput();?>
+    
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
