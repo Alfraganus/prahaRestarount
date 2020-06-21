@@ -44,7 +44,7 @@ class Event extends \yii\db\ActiveRecord
 public function upload()
 {
     if($this->event_photo->baseName){
-        $this->event_photo->saveAs(Yii::$app->basePath.'uploads/'.$event_photo->baseName . '.'.$event_photo->extension);
+        $this->event_photo->saveAs(Yii::$app->basePath.'//uploads/'.$this->event_photo->baseName .time().'.'.$this->event_photo->extension);
         return true;
     }else{
         return false;

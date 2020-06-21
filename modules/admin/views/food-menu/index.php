@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'menu_title_en',
             'menu_title_cz',
+            'food_image',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

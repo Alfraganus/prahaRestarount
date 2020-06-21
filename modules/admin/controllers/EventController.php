@@ -95,7 +95,7 @@ class EventController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 $model->event_photo = UploadedFile::getInstance($model,'event_photo');
                 if($model->upload()){
-                    $model->event_photo = $model->event_photo->baseName.'.'.$model->event_photo->extension;
+                    $model->event_photo = $model->event_photo->baseName.time().'.'.$model->event_photo->extension;
                     $model->save();
     
                 }
