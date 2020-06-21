@@ -68,7 +68,7 @@ class FoodMenu extends \yii\db\ActiveRecord
     public function upload()
     {
         if($this->food_image->baseName){
-            $this->food_image->saveAs(Yii::$app->basePath.'uploads/'.$food_image->baseName . '.'.$food_image->extension);
+            $this->food_image->saveAs(Yii::$app->basePath.'//foodUploads/'.$this->food_image->baseName . '.'.$this->food_image->extension);
             return true;
         }else{
             return false;
