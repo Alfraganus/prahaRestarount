@@ -9,28 +9,31 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="food-menu-form">
-<div class="form-row">
+>
   
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
-    <div class="form-group col-md-6">
+    
     <?= $form->field($model, 'menu_title_en')->textarea(['rows' => 5]) ?>
-</div>
-<div class="form-group col-md-6">
+
+
     <?= $form->field($model, 'menu_title_cz')->textarea(['rows' => 5]) ?>
-    </div>
-    <div class="form-group col-md-6"> <?= $form->field($model, 'food_desc_en')->textarea(['rows' => 8]) ?></div>
-    <div class="form-group col-md-6">  <?= $form->field($model, 'food_desc_cz')->textarea(['rows' => 8]) ?></div>
+   
+    < <?= $form->field($model, 'food_desc_en')->textarea(['rows' => 8]) ?>
+    <?= $form->field($model, 'food_desc_cz')->textarea(['rows' => 8]) ?>
+   
+    <?= $form->field($model, 'price')->textarea(['rows' => 8]) ?>
+<?= $form->field($model, 'show_priority')->textarea(['rows' => 8]) ?>
+   ><?= $form->field($model, 'food_image')->fileInput() ?>
 
-    <div class="form-group col-md-6"> <?= $form->field($model, 'price')->textarea(['rows' => 8]) ?></div>
+    <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => ''])  ?></div>
+    <?php
+        $data = \yii\helpers\ArrayHelper::map(\app\models\FoodCategory::find()->all(),'id','category_name')
+        ?>
+        <?= $form->field($model, 'category_id')->dropDownList($data) ?>
+      
 
-    <div class="form-group col-md-6"><?= $form->field($model, 'show_priority')->textarea(['rows' => 8]) ?></div>
-    <div class="form-group col-md-6"><?= $form->field($model, 'food_image')->fileInput() ?></div>
-
-    <div class="form-group col-md-6"> <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => ''])  ?></div>
-
-    <div class="form-group" >
-       <div class="form-group col-md-6" style="text-align:center"> <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?></div>
-    </div>
+       <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    
 
     <?php ActiveForm::end(); ?>
 

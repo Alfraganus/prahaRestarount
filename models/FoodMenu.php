@@ -16,6 +16,7 @@ use Yii;
  * @property string $food_desc_en
  * @property string $food_desc_cz
  * @property string $food_image
+ * @property int $category_id
  */
 class FoodMenu extends \yii\db\ActiveRecord
 {
@@ -36,7 +37,7 @@ class FoodMenu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['menu_title_en', 'menu_title_cz', 'price', 'show_priority', 'status','food_desc_en','food_desc_cz'], 'required'],
+            [['menu_title_en', 'menu_title_cz', 'price', 'show_priority', 'status','food_desc_en','food_desc_cz','category_id'], 'required'],
             [['menu_title_en', 'menu_title_cz', 'price', 'show_priority', 'status','food_desc_en','food_desc_cz'], 'string', 'max' => 255],
             [['food_image'], 'file',  'extensions' => ['png','jpg','jpeg']],
         ];
@@ -56,9 +57,13 @@ class FoodMenu extends \yii\db\ActiveRecord
             'status' => 'status',
             'food_desc_en'=>'Food description(English)',
             'food_desc_cz'=>'Food description(Czech)',
+            'category_id'=>'Food Category',
         ];
     }
-
+    public function getFoodCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
 
     public function upload()
     {
@@ -69,7 +74,7 @@ class FoodMenu extends \yii\db\ActiveRecord
             return false;
         }
 
-
+     
 
 
 

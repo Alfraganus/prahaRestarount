@@ -66,6 +66,14 @@ BackendAsset::register($this);
 					</li>
 
 					<li class="sidebar-item">
+						<a class="sidebar-link" href="<?=Url::to(['food-category/'])?>">
+              <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Add food category</span>
+            </a>
+					</li>
+
+
+
+					<li class="sidebar-item">
 											<a class="sidebar-link" href="<?=Url::to(['event/'])?>">
               <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Add events news</span>
             </a>
