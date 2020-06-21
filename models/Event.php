@@ -34,7 +34,7 @@ class Event extends \yii\db\ActiveRecord
             [['event_title_en', 'event_title_cz', 'event_description_en', 'event_description_cz'], 'required'],
             [['event_description_en', 'event_description_cz'], 'string'],
             [['event_title_en', 'event_title_cz'], 'string', 'max' => 255],
-            [['imageFile'],'file','extensions'=>['png','jpg','jpeg']],
+            [['event_photo'],'file','extensions'=>['png','jpg','jpeg']],
            
         
         ];
@@ -43,8 +43,8 @@ class Event extends \yii\db\ActiveRecord
 
 public function upload()
 {
-    if($this->imageFile->baseName){
-        $this->imageFile->saveAs(Yii::$app->basePath.'uploads/'.$imageFile->baseName . '.'.$imageFile->extension);
+    if($this->event_photo->baseName){
+        $this->event_photo->saveAs(Yii::$app->basePath.'uploads/'.$event_photo->baseName . '.'.$event_photo->extension);
         return true;
     }else{
         return false;

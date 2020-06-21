@@ -65,7 +65,7 @@ class foodMenuSearch extends foodMenu
             ->andFilterWhere(['like', 'menu_title_cz', $this->menu_title_cz])
             ->andFilterWhere(['like', 'price', $this->price])
             ->andFilterWhere(['like', 'show_priority', $this->show_priority])
-            ->andFilterWhere(['like', 'active', $this->active]);
+            ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

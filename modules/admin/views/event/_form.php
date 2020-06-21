@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'event_description_cz')->textarea(['rows' => 8]) ?>
 
-    <?=$form->field($model,'imageFile')->fileInput();?>
+    <?=$form->field($model,'event_photo')->fileInput();?>
     
 
     <div class="form-group">

@@ -8,6 +8,7 @@ use app\models\search\foodMenuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * FoodMenuController implements the CRUD actions for foodMenu model.
@@ -67,14 +68,19 @@ class FoodMenuController extends Controller
         $model = new foodMenu();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->food_image = UploadedFile::getInstance($model,'food_image');
+            if($model->upload()){
+                $model->food_image = $model->food_image->baseName.'.'.$model->food_image->extension;
+                $model->save();
+
+            }
             return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
-
     /**
      * Updates an existing foodMenu model.
      * If update is successful, the browser will be redirected to the 'view' page.

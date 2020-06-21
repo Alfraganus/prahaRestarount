@@ -9,21 +9,27 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="food-menu-form">
+<div class="form-row">
+  
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+    <div class="form-group col-md-6">
+    <?= $form->field($model, 'menu_title_en')->textarea(['rows' => 5]) ?>
+</div>
+<div class="form-group col-md-6">
+    <?= $form->field($model, 'menu_title_cz')->textarea(['rows' => 5]) ?>
+    </div>
+    <div class="form-group col-md-6"> <?= $form->field($model, 'food_desc_en')->textarea(['rows' => 8]) ?></div>
+    <div class="form-group col-md-6">  <?= $form->field($model, 'food_desc_cz')->textarea(['rows' => 8]) ?></div>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="form-group col-md-6"> <?= $form->field($model, 'price')->textarea(['rows' => 8]) ?></div>
 
-    <?= $form->field($model, 'menu_title_en')->textInput(['maxlength' => true]) ?>
+    <div class="form-group col-md-6"><?= $form->field($model, 'show_priority')->textarea(['rows' => 8]) ?></div>
+    <div class="form-group col-md-6"><?= $form->field($model, 'food_image')->fileInput() ?></div>
 
-    <?= $form->field($model, 'menu_title_cz')->textInput(['maxlength' => true]) ?>
+    <div class="form-group col-md-6"> <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => ''])  ?></div>
 
-    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'show_priority')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'active')->textInput(['maxlength' => true]) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <div class="form-group" >
+       <div class="form-group col-md-6" style="text-align:center"> <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?></div>
     </div>
 
     <?php ActiveForm::end(); ?>

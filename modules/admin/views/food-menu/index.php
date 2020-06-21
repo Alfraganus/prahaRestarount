@@ -31,7 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'menu_title_cz',
             'price',
             'show_priority',
-            //'active',
+            'status',
+            'menu_title_en',
+            'menu_title_cz',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

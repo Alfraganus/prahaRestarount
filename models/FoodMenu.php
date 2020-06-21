@@ -12,7 +12,10 @@ use Yii;
  * @property string $menu_title_cz
  * @property string $price
  * @property string $show_priority
- * @property string $active
+ * @property string $status
+ * @property string $food_desc_en
+ * @property string $food_desc_cz
+ * @property string $food_image
  */
 class FoodMenu extends \yii\db\ActiveRecord
 {
@@ -24,14 +27,18 @@ class FoodMenu extends \yii\db\ActiveRecord
         return 'food_menu';
     }
 
+
+
+    
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['menu_title_en', 'menu_title_cz', 'price', 'show_priority', 'active'], 'required'],
-            [['menu_title_en', 'menu_title_cz', 'price', 'show_priority', 'active'], 'string', 'max' => 255],
+            [['menu_title_en', 'menu_title_cz', 'price', 'show_priority', 'status','food_desc_en','food_desc_cz'], 'required'],
+            [['menu_title_en', 'menu_title_cz', 'price', 'show_priority', 'status','food_desc_en','food_desc_cz'], 'string', 'max' => 255],
+            [['food_image'], 'file',  'extensions' => ['png','jpg','jpeg']],
         ];
     }
 
@@ -42,11 +49,30 @@ class FoodMenu extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'menu_title_en' => 'Menu Title En',
-            'menu_title_cz' => 'Menu Title Cz',
+            'menu_title_en' => 'Menu title(English)',
+            'menu_title_cz' => 'Menu title (Czech)',
             'price' => 'Price',
             'show_priority' => 'Show Priority',
-            'active' => 'Active',
+            'status' => 'status',
+            'food_desc_en'=>'Food description(English)',
+            'food_desc_cz'=>'Food description(Czech)',
         ];
     }
+
+
+    public function upload()
+    {
+        if($this->food_image->baseName){
+            $this->food_image->saveAs(Yii::$app->basePath.'uploads/'.$food_image->baseName . '.'.$food_image->extension);
+            return true;
+        }else{
+            return false;
+        }
+
+
+
+
+
+
+}
 }
