@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 0a60afafb69735b97de1fa7517a820b9c094b7ae
 <!--slideshow-->
 <div class="heading-group slideshow color-w">
     <h1>Welccome to our<span>Restaurent</span></h1>
@@ -49,7 +46,7 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-6">
-                <div class="ad-item bg-2">
+                <div class="ad-item bg-2">c
                     <h3>Hot deal - Free</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, commodi
                         <a class="readmore" href="fdetail.html">Read more</a>
