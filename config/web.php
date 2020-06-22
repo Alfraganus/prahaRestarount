@@ -19,7 +19,14 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
-      
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js'=>[]
+                ],
+
+            ],
+        ],
         'i18n' => [
             'translations' => [
                 'app' => [
