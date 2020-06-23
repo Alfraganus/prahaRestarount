@@ -1,319 +1,597 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
-use app\widgets\Alert;
+use app\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use app\assets\BackendAsset;
 use yii\helpers\Url;
-
-BackendAsset::register($this);
-?>
-<?php $this->beginPage() ?>
+use yii\widgets\Breadcrumbs;
+\app\assets\BackendAsset::register($this);
+$this->beginPage(); ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="<?=Yii::$app->homeUrl?>images/favicon.ico">
+    <?php $this->registerCsrfMetaTags(); ?>
+    <title><?= Html::encode($this->title); ?></title>
+    <?php $this->head(); ?>
 </head>
-<body>
-<?php $this->beginBody() ?>
 
-<div class="wrapper">
-		<nav id="sidebar" class="sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
-          <span class="align-middle">AdminKit</span>
-        </a>
+<body data-sidebar="dark">
+    <?php $this->beginBody(); ?>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Pages
-					</li>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="<?= $app->homeUrl; ?>" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="<?=Yii::$app->homeUrl?>images/logo-sm-dark.png" alt="" height="30">
+                    </span>
+                            <span class="logo-lg">
+                        <img src="<?=Yii::$app->homeUrl?>images/logo-dark.png" alt="" height="35">
+                    </span>
+                        </a>
 
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="<?=Url::to(['default/'])?>">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            </a>
-					</li>
+                        <a href="<?= $app->homeUrl; ?>" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="<?=Yii::$app->homeUrl?>images/logo-sm-dark.png" alt="" height="30">
+                    </span>
+                            <span class="logo-lg">
+                        <img src="<?=Yii::$app->homeUrl?>images/logo-dark.png" alt="" height="35">
+                    </span>
+                        </a>
+                    </div>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="site/signup">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-            </a>
-					</li>
+                    <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                        <i class="ri-menu-2-line align-middle"></i>
+                    </button>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="<?=Url::to(['site/translate'])?>">
-              <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Static Language change</span>
-            </a>
-					</li>
+                    <!-- App Search-->
+                    <form class="app-search d-none d-lg-block">
+                        <div class="position-relative">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="ri-search-line"></span>
+                        </div>
+                    </form>
+                </div>
 
-	
+                <div class="d-flex">
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="<?=Url::to(['food-menu/'])?>">
-              <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Add food</span>
-            </a>
-					</li>
+                    <div class="dropdown d-inline-block d-lg-none ml-2">
+                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ri-search-line"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" aria-labelledby="page-header-search-dropdown">
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="<?=Url::to(['food-category/'])?>">
-              <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Add food category</span>
-            </a>
-					</li>
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ...">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i class="ri-search-line"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
+                    <div class="dropdown d-none d-sm-inline-block">
+                        <button type="button" class="btn header-item waves-effect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="" src="<?=Yii::$app->homeUrl?>images/flags/us.jpg" alt="Header Language" height="16">
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
 
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <img src="<?=Yii::$app->homeUrl?>images/flags/spain.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
+                            </a>
 
-					<li class="sidebar-item">
-											<a class="sidebar-link" href="<?=Url::to(['event/'])?>">
-              <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Add events news</span>
-            </a>
-					</li>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <img src="<?=Yii::$app->homeUrl?>images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
+                            </a>
 
-			
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <img src="<?=Yii::$app->homeUrl?>images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
+                            </a>
 
-					
-					
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <img src="<?=Yii::$app->homeUrl?>images/flags/russia.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
+                            </a>
+                        </div>
+                    </div>
 
-				
-			
+                    <div class="dropdown d-none d-lg-inline-block ml-1">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ri-apps-2-line"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <div class="px-lg-2">
+                                <div class="row no-gutters">
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="<?=Yii::$app->homeUrl?>images/brands/github.png" alt="Github">
+                                            <span>GitHub</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="<?=Yii::$app->homeUrl?>images/brands/bitbucket.png" alt="bitbucket">
+                                            <span>Bitbucket</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="<?=Yii::$app->homeUrl?>images/brands/dribbble.png" alt="dribbble">
+                                            <span>Dribbble</span>
+                                        </a>
+                                    </div>
+                                </div>
 
-				<div class="sidebar-cta">
-					<div class="sidebar-cta-content">
-						<strong class="d-inline-block mb-2">Upgrade to Pro</strong>
-						<div class="mb-3 text-sm">
-							Are you looking for more components? Check out our premium version.
-						</div>
-						<a href="https://adminkit.io/pricing" target="_blank" class="btn btn-primary btn-block">Upgrade to Pro</a>
-					</div>
-				</div>
-			</div>
-		</nav>
+                                <div class="row no-gutters">
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="<?=Yii::$app->homeUrl?>images/brands/dropbox.png" alt="dropbox">
+                                            <span>Dropbox</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="<?=Yii::$app->homeUrl?>images/brands/mail_chimp.png" alt="mail_chimp">
+                                            <span>Mail Chimp</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="<?=Yii::$app->homeUrl?>images/brands/slack.png" alt="slack">
+                                            <span>Slack</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle d-flex">
-          <i class="hamburger align-self-center"></i>
-        </a>
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ri-notification-3-line"></i>
+                            <span class="noti-dot"></span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" aria-labelledby="page-header-notifications-dropdown">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="m-0"> Notifications </h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#!" class="small"> View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-simplebar style="max-height: 230px;">
+                                <a href="" class="text-reset notification-item">
+                                    <div class="media">
+                                        <div class="avatar-xs mr-3">
+                                    <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                        <i class="ri-shopping-cart-line"></i>
+                                    </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="mt-0 mb-1">Your order is placed</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1">If several languages coalesce the grammar</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="text-reset notification-item">
+                                    <div class="media">
+                                        <img src="<?=Yii::$app->homeUrl?>images/users/avatar-3.jpg" class="mr-3 rounded-circle avatar-xs" alt="user-pic">
+                                        <div class="media-body">
+                                            <h6 class="mt-0 mb-1">James Lemire</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1">It will seem like simplified English.</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="" class="text-reset notification-item">
+                                    <div class="media">
+                                        <div class="avatar-xs mr-3">
+                                    <span class="avatar-title bg-success rounded-circle font-size-16">
+                                        <i class="ri-checkbox-circle-line"></i>
+                                    </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="mt-0 mb-1">Your item is shipped</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1">If several languages coalesce the grammar</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
 
-				<form class="form-inline d-none d-sm-inline-block">
-					<div class="input-group input-group-navbar">
-						<input type="text" class="form-control" placeholder="Search…" aria-label="Search">
-						<div class="input-group-append">
-							<button class="btn" type="button">
-                <i class="align-middle" data-feather="search"></i>
-              </button>
-						</div>
-					</div>
-				</form>
+                                <a href="" class="text-reset notification-item">
+                                    <div class="media">
+                                        <img src="<?=Yii::$app->homeUrl?>images/users/avatar-4.jpg" class="mr-3 rounded-circle avatar-xs" alt="user-pic">
+                                        <div class="media-body">
+                                            <h6 class="mt-0 mb-1">Salena Layfield</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="p-2 border-top">
+                                <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
+                                    <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown">
-								<div class="position-relative">
-									<i class="align-middle" data-feather="bell"></i>
-									<span class="indicator">4</span>
-								</div>
-							</a>
-							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown">
-								<div class="dropdown-menu-header">
-									4 New Notifications
-								</div>
-								<div class="list-group">
-									<a href="#" class="list-group-item">
-										<div class="row no-gutters align-items-center">
-											<div class="col-2">
-												<i class="text-danger" data-feather="alert-circle"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">Update completed</div>
-												<div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
-												<div class="text-muted small mt-1">30m ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row no-gutters align-items-center">
-											<div class="col-2">
-												<i class="text-warning" data-feather="bell"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">Lorem ipsum</div>
-												<div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
-												<div class="text-muted small mt-1">2h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row no-gutters align-items-center">
-											<div class="col-2">
-												<i class="text-primary" data-feather="home"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">Login from 192.186.1.8</div>
-												<div class="text-muted small mt-1">5h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row no-gutters align-items-center">
-											<div class="col-2">
-												<i class="text-success" data-feather="user-plus"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">New connection</div>
-												<div class="text-muted small mt-1">Christina accepted your request.</div>
-												<div class="text-muted small mt-1">14h ago</div>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="dropdown-menu-footer">
-									<a href="#" class="text-muted">Show all notifications</a>
-								</div>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-toggle="dropdown">
-								<div class="position-relative">
-									<i class="align-middle" data-feather="message-square"></i>
-								</div>
-							</a>
-							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="messagesDropdown">
-								<div class="dropdown-menu-header">
-									<div class="position-relative">
-										4 New Messages
-									</div>
-								</div>
-								<div class="list-group">
-									<a href="#" class="list-group-item">
-										<div class="row no-gutters align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
-											</div>
-											<div class="col-10 pl-2">
-												<div class="text-dark">Vanessa Tucker</div>
-												<div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
-												<div class="text-muted small mt-1">15m ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row no-gutters align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle" alt="William Harris">
-											</div>
-											<div class="col-10 pl-2">
-												<div class="text-dark">William Harris</div>
-												<div class="text-muted small mt-1">Curabitur ligula sapien euismod vitae.</div>
-												<div class="text-muted small mt-1">2h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row no-gutters align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-4.jpg" class="avatar img-fluid rounded-circle" alt="Christina Mason">
-											</div>
-											<div class="col-10 pl-2">
-												<div class="text-dark">Christina Mason</div>
-												<div class="text-muted small mt-1">Pellentesque auctor neque nec urna.</div>
-												<div class="text-muted small mt-1">4h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row no-gutters align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-3.jpg" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
-											</div>
-											<div class="col-10 pl-2">
-												<div class="text-dark">Sharon Lessman</div>
-												<div class="text-muted small mt-1">Aenean tellus metus, bibendum sed, posuere ac, mattis non.</div>
-												<div class="text-muted small mt-1">5h ago</div>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="dropdown-menu-footer">
-									<a href="#" class="text-muted">Show all messages</a>
-								</div>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-toggle="dropdown">
-                <i class="align-middle" data-feather="settings"></i>
-              </a>
+                    <div class="dropdown d-inline-block user-dropdown">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="<?=Yii::$app->homeUrl?>images/users/avatar-2.jpg" alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ml-1">Avlo Admin</span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <!-- item-->
+                            <a class="dropdown-item" href="#">
+                                <i class="ri-user-line align-middle mr-1"></i> Profile
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="ri-wallet-2-line align-middle mr-1"></i> My Wallet
+                            </a>
+                            <a class="dropdown-item d-block" href="#">
+                                <span class="badge badge-success float-right mt-1">11</span>
+                                <i class="ri-settings-2-line align-middle mr-1"></i> Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="ri-lock-unlock-line align-middle mr-1"></i> Lock screen
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="<?= Yii::$app->homeUrl; ?>auth/logout">
+                                <i class="ri-shut-down-line align-middle mr-1 text-danger"></i> Logout
+                            </a>
+                        </div>
+                    </div>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded mr-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
-              </a>
-							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle mr-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="pie-chart"></i> Analytics</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="pages-settings.html"><i class="align-middle mr-1" data-feather="settings"></i> Settings & Privacy</a>
-								<a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="help-circle"></i> Help Center</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
+                </div>
+            </div>
+        </header>
 
-			<main class="content">
-				<div class="container-fluid p-0">
+        <!-- Left Sidebar Start -->
+        <div class="vertical-menu">
 
-		
-<?=$content?>
+            <div data-simplebar class="h-100">
 
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title">Menu</li>
 
-				</div>
-			</main>
+                        <li>
+                            <a href="index.html" class="waves-effect">
+                                <i class="ri-dashboard-line"></i><span class="badge badge-pill badge-success float-right">3</span>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
 
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-left">
-							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
-							</p>
-						</div>
-						<div class="col-6 text-right">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#">Terms</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
+                        <li>
+                            <a href="calendar.html" class=" waves-effect">
+                                <i class="ri-calendar-2-line"></i>
+                                <span>Calendar</span>
+                            </a>
+                        </li>
 
+                        <li>
+                            <a href="apps-chat.html" class=" waves-effect">
+                                <i class="ri-chat-1-line"></i>
+                                <span>Chat</span>
+                            </a>
+                        </li>
 
-<?php $this->endBody() ?>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-store-2-line"></i>
+                                <span>Ecommerce</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="ecommerce-products.html">Products</a></li>
+                                <li><a href="ecommerce-product-detail.html">Product Detail</a></li>
+                                <li><a href="ecommerce-orders.html">Orders</a></li>
+                                <li><a href="ecommerce-customers.html">Customers</a></li>
+                                <li><a href="ecommerce-cart.html">Cart</a></li>
+                                <li><a href="ecommerce-checkout.html">Checkout</a></li>
+                                <li><a href="ecommerce-shops.html">Shops</a></li>
+                                <li><a href="ecommerce-add-product.html">Add Product</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-mail-send-line"></i>
+                                <span>Email</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="email-inbox.html">Inbox</a></li>
+                                <li><a href="email-read.html">Read Email</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="apps-kanban-board.html" class=" waves-effect">
+                                <i class="ri-artboard-2-line"></i>
+                                <span>Kanban Board</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-layout-3-line"></i>
+                                <span>Layouts</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="layouts-horizontal.html">Horizontal</a></li>
+                                <li><a href="layouts-light-sidebar.html">Light Sidebar</a></li>
+                                <li><a href="layouts-compact-sidebar.html">Compact Sidebar</a></li>
+                                <li><a href="layouts-icon-sidebar.html">Icon Sidebar</a></li>
+                                <li><a href="layouts-boxed.html">Boxed Layout</a></li>
+                                <li><a href="layouts-preloader.html">Preloader</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-title">Pages</li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-account-circle-line"></i>
+                                <span>Authentication</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="auth-login.html">Login</a></li>
+                                <li><a href="auth-register.html">Register</a></li>
+                                <li><a href="auth-recoverpw.html">Recover Password</a></li>
+                                <li><a href="auth-lock-screen.html">Lock Screen</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-profile-line"></i>
+                                <span>Utility</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="pages-starter.html">Starter Page</a></li>
+                                <li><a href="pages-maintenance.html">Maintenance</a></li>
+                                <li><a href="pages-comingsoon.html">Coming Soon</a></li>
+                                <li><a href="pages-timeline.html">Timeline</a></li>
+                                <li><a href="pages-faqs.html">FAQs</a></li>
+                                <li><a href="pages-pricing.html">Pricing</a></li>
+                                <li><a href="pages-404.html">Error 404</a></li>
+                                <li><a href="pages-500.html">Error 500</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-title">Components</li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-pencil-ruler-2-line"></i>
+                                <span>UI Elements</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="ui-alerts.html">Alerts</a></li>
+                                <li><a href="ui-buttons.html">Buttons</a></li>
+                                <li><a href="ui-cards.html">Cards</a></li>
+                                <li><a href="ui-carousel.html">Carousel</a></li>
+                                <li><a href="ui-dropdowns.html">Dropdowns</a></li>
+                                <li><a href="ui-grid.html">Grid</a></li>
+                                <li><a href="ui-images.html">Images</a></li>
+                                <li><a href="ui-lightbox.html">Lightbox</a></li>
+                                <li><a href="ui-modals.html">Modals</a></li>
+                                <li><a href="ui-rangeslider.html">Range Slider</a></li>
+                                <li><a href="ui-roundslider.html">Round Slider</a></li>
+                                <li><a href="ui-session-timeout.html">Session Timeout</a></li>
+                                <li><a href="ui-progressbars.html">Progress Bars</a></li>
+                                <li><a href="ui-sweet-alert.html">Sweet Alerts</a></li>
+                                <li><a href="ui-tabs-accordions.html">Tabs & Accordions</a></li>
+                                <li><a href="ui-typography.html">Typography</a></li>
+                                <li><a href="ui-video.html">Video</a></li>
+                                <li><a href="ui-general.html">General</a></li>
+                                <li><a href="ui-rating.html">Rating</a></li>
+                                <li><a href="ui-notifications.html">Notifications</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="waves-effect">
+                                <i class="ri-eraser-fill"></i>
+                                <span class="badge badge-pill badge-danger float-right">6</span>
+                                <span>Forms</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="form-elements.html">Elements</a></li>
+                                <li><a href="form-validation.html">Validation</a></li>
+                                <li><a href="form-advanced.html">Advanced Plugins</a></li>
+                                <li><a href="form-editors.html">Editors</a></li>
+                                <li><a href="form-uploads.html">File Upload</a></li>
+                                <li><a href="form-xeditable.html">X-editable</a></li>
+                                <li><a href="form-wizard.html">Wizard</a></li>
+                                <li><a href="form-mask.html">Mask</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-table-2"></i>
+                                <span>Tables</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="tables-basic.html">Basic Tables</a></li>
+                                <li><a href="tables-datatable.html">Data Tables</a></li>
+                                <li><a href="tables-responsive.html">Responsive Table</a></li>
+                                <li><a href="tables-editable.html">Editable Table</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-bar-chart-line"></i>
+                                <span>Charts</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="charts-apex.html">Apexcharts</a></li>
+                                <li><a href="charts-chartjs.html">Chartjs</a></li>
+                                <li><a href="charts-flot.html">Flot</a></li>
+                                <li><a href="charts-knob.html">Jquery Knob</a></li>
+                                <li><a href="charts-sparkline.html">Sparkline</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-brush-line"></i>
+                                <span>Icons</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="icons-remix.html">Remix Icons</a></li>
+                                <li><a href="icons-materialdesign.html">Material Design</a></li>
+                                <li><a href="icons-dripicons.html">Dripicons</a></li>
+                                <li><a href="icons-fontawesome.html">Font awesome 5</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-map-pin-line"></i>
+                                <span>Maps</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="maps-google.html">Google Maps</a></li>
+                                <li><a href="maps-vector.html">Vector Maps</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-share-line"></i>
+                                <span>Multi Level</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="javascript: void(0);">Level 1.1</a></li>
+                                <li><a href="javascript: void(0);" class="has-arrow">Level 1.2</a>
+                                    <ul class="sub-menu" aria-expanded="true">
+                                        <li><a href="javascript: void(0);">Level 2.1</a></li>
+                                        <li><a href="javascript: void(0);">Level 2.2</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+
+        <!-- Start right Content here -->
+        <div class="main-content">
+            <div class="page-content">
+
+                <div class="card p-3">
+                    <?= $content ?>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            © AVLO UZ. All rights reserved.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                Dashboard version: 0.1.1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Right Sidebar -->
+    <div class="right-bar">
+        <div data-simplebar class="h-100">
+            <div class="rightbar-title px-3 py-4">
+                <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                    <i class="mdi mdi-close noti-icon"></i>
+                </a>
+                <h5 class="m-0">Settings</h5>
+            </div>
+
+            <!-- Settings -->
+            <hr class="mt-0" />
+            <h6 class="text-center mb-0">Choose Layouts</h6>
+
+            <div class="p-4">
+                <div class="mb-2">
+                    <img src="<?=Yii::$app->homeUrl?>images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
+                </div>
+                <div class="custom-control custom-switch mb-3">
+                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
+                    <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
+                </div>
+
+                <div class="mb-2">
+                    <img src="<?=Yii::$app->homeUrl?>images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
+                </div>
+                <div class="custom-control custom-switch mb-3">
+                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css" />
+                    <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
+                </div>
+
+                <div class="mb-2">
+                    <img src="<?=Yii::$app->homeUrl?>images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
+                </div>
+                <div class="custom-control custom-switch mb-5">
+                    <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="assets/css/app-rtl.min.css" />
+                    <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
+                </div>
+            </div>
+
+        </div> <!-- end slimscroll-menu-->
+    </div>
+    <!-- /Right-bar -->
+
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <?php $this->endBody(); ?>
+
 </body>
+
 </html>
-<?php $this->endPage() ?>
+<?php $this->endPage(); ?>
