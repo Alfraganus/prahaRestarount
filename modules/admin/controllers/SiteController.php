@@ -62,10 +62,24 @@ class SiteController extends Controller
      */
 
 
-    public function actionIndex()
+    public function actionIndex($category=null)
     {
+        $searchModel = new PostSearch();
+$dataProvider = $searchModel->search(Yii::$app->request->queryParams,true);
+
         \Yii::$app->language = 'en';
-        return $this->render('index');
+        if ($category) {
+            $searchModel->category_id = $category;
+        }
+       
+        $dataProvider = $searchModel->search(null,true);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+
     }
 
     public function actionTranslate()

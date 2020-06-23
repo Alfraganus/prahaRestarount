@@ -120,9 +120,10 @@
         <div class="row">
             <div class="owl" data-items="4" data-itemsDesktop="4" data-itemsDesktopSmall="3" data-itemsTablet="2" data-itemsMobile="1">
                 <div class="col-md-12">
+                <?php foreach ($dataProvider->getModels() as $model) { ?>
                     <div class="thumbnail">
                         <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
-                            <img src="images/default.png" alt="image">
+                            <img src="<?=$model->food_image?>" alt="image">
                             <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
                         </a>
                         <div class="caption">
@@ -131,46 +132,8 @@
                             <p>Lorem ipsum dolor sit amet conse ctetur</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="thumbnail">
-                        <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
-                            <img src="images/default.png" alt="image">
-                            <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
-                        </a>
-                        <div class="caption">
-                            <h4><a href="fdetail.html">Chicken Breast</a></h4>
-                            <p class="price">$56.99</p>
-                            <p>Lorem ipsum dolor sit amet conse ctetur</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="thumbnail">
-                        <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
-                            <img src="images/default.png" alt="image">
-                            <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
-                        </a>
-                        <div class="caption">
-                            <h4><a href="fdetail.html">Chicken Breast</a></h4>
-                            <p class="price">$56.99</p>
-                            <p>Lorem ipsum dolor sit amet conse ctetur</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="thumbnail">
-                        <a href="images/thumbs-large/default-large.png" class="hover-img image-zoom">
-                            <img src="images/default.png" alt="image">
-                            <div class="hover-caption color-w"><i class="fa fa-search-plus"></i></div>
-                        </a>
-                        <div class="caption">
-                            <h4><a href="fdetail.html">Chicken Breast</a></h4>
-                            <p class="price">$56.99</p>
-                            <p>Lorem ipsum dolor sit amet conse ctetur</p>
-                        </div>
-                    </div>
-                </div>
+                    <?php } ?>    </div>
+        
             </div>
         </div>
     </div>
